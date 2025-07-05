@@ -1,0 +1,89 @@
+ecommerce-site/
+├── backend/
+│   ├── app.py
+│   ├── config.py
+│   ├── requirements.txt
+│   ├── instance/
+│   │   └── config.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── auth_routes.py
+│   │   ├── product_routes.py
+│   │   ├── cart_routes.py
+│   │   ├── order_routes.py
+│   │   ├── wishlist_routes.py
+│   │   ├── user_routes.py
+│   │   ├── warranty_routes.py
+│   │   └── contact_routes.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── product.py
+│   │   ├── cart.py
+│   │   ├── order.py
+│   │   ├── wishlist.py
+│   │   └── warranty.py
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── email_service.py
+│   │   ├── image_upload.py
+│   │   └── payment_gateway.py
+│   └── static/
+│       └── images/
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   │   └── images/
+│   │   ├── components/
+│   │   │   ├── common/
+│   │   │   │   ├── AppBar.vue
+│   │   │   │   ├── Footer.vue
+│   │   │   │   └── NewsletterSignup.vue
+│   │   │   ├── home/
+│   │   │   │   ├── HeroBanner.vue
+│   │   │   │   ├── FeaturedCategories.vue
+│   │   │   │   └── ProductSections.vue
+│   │   │   ├── product/
+│   │   │   │   ├── ProductCard.vue
+│   │   │   │   ├── ProductGallery.vue
+│   │   │   │   └── ProductDetails.vue
+│   │   │   └── account/
+│   │   │       ├── Login.vue
+│   │   │       ├── Register.vue
+│   │   │       ├── Dashboard.vue
+│   │   │       ├── Orders.vue
+│   │   │       ├── AddressBook.vue
+│   │   │       └── Warranty.vue
+│   │   ├── views/
+│   │   │   ├── Home.vue
+│   │   │   ├── Shop.vue
+│   │   │   ├── Product.vue
+│   │   │   ├── Cart.vue
+│   │   │   ├── Checkout.vue
+│   │   │   ├── Contact.vue
+│   │   │   ├── About.vue
+│   │   │   ├── PrivacyPolicy.vue
+│   │   │   └── FAQs.vue
+│   │   ├── router/
+│   │   │   └── index.js
+│   │   ├── store/
+│   │   │   ├── index.js
+│   │   │   ├── modules/
+│   │   │   │   ├── cart.js
+│   │   │   │   ├── products.js
+│   │   │   │   ├── user.js
+│   │   │   │   ├── wishlist.js
+│   │   │   │   └── orders.js
+│   │   ├── App.vue
+│   │   └── main.js
+│   └── package.json
+│
+├── deploy/
+│   ├── gunicorn_config.py
+│   ├── nginx.conf
+│   └── Dockerfile (optional)
+│
+├── .env
+└── README.md
