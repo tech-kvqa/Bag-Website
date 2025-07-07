@@ -59,7 +59,8 @@ export default {
       const user = localStorage.getItem('user')
       if (user) {
         const userId = JSON.parse(user).id
-        axios.get(`http://127.0.0.1:5000/orders?user_id=${userId}`)
+        // axios.get(`http://127.0.0.1:5000/orders?user_id=${userId}`)
+        axios.get(`https://bag-website.onrender.com/orders?user_id=${userId}`)
           .then(res => {
             this.orders = res.data
           })

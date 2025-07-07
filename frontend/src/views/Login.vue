@@ -19,7 +19,8 @@ export default {
   },
   methods: {
     login() {
-      axios.post("http://127.0.0.1:5000/login", {
+      // axios.post("http://127.0.0.1:5000/login", {
+      axios.post("https://bag-website.onrender.com/login", {
         email: this.email,
         password: this.password
         })
@@ -31,7 +32,8 @@ export default {
         const userId = res.data.user.id
 
         cart.forEach(item => {
-            axios.post('http://127.0.0.1:5000/cart', {
+            // axios.post('http://127.0.0.1:5000/cart', {
+            axios.post('https://bag-website.onrender.com/cart', {
             user_id: userId,
             product_id: item.product.id,
             quantity: item.quantity

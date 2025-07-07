@@ -29,7 +29,8 @@ export default {
       const user = localStorage.getItem('user')
       if (user) {
         const userId = JSON.parse(user).id
-        axios.get(`http://127.0.0.1:5000/wishlist?user_id=${userId}`)
+        // axios.get(`http://127.0.0.1:5000/wishlist?user_id=${userId}`)
+        axios.get(`https://bag-website.onrender.com/wishlist?user_id=${userId}`)
           .then(res => {
             this.wishlist = res.data
           })

@@ -35,7 +35,8 @@ export default {
         return
       }
 
-      axios.post("http://127.0.0.1:5000/register", {
+      // axios.post("http://127.0.0.1:5000/register", {
+      axios.post("https://bag-website.onrender.com/register", {
         name: this.name,
         email: this.email,
         phone: this.phone,

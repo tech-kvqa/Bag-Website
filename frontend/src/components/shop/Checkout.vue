@@ -93,7 +93,8 @@ export default {
         cart: this.cart
       }
 
-        axios.post("http://127.0.0.1:5000/place-order", orderData)
+        // axios.post("http://127.0.0.1:5000/place-order", orderData)
+        axios.post("https://bag-website.onrender.com/place-order", orderData)
         .then(res => {
             alert(`Order placed successfully! Order ID: ${res.data.order_id}`)
             localStorage.removeItem('cart')

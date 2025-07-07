@@ -72,7 +72,8 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://127.0.0.1:5000/products")
+    // axios.get("http://127.0.0.1:5000/products")
+    axios.get("https://bag-website.onrender.com/products")
       .then(res => {
         this.allProducts = res.data
         this.filterProducts()
