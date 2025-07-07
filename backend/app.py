@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from models import *
 from api.product_api import product_api
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -10,6 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'anuragiitmadras'
 
 db.init_app(app)
+CORS(app)
 
 app.register_blueprint(product_api)
 

@@ -27,7 +27,7 @@
       </v-list>
     </v-menu>
 
-    <v-btn text :to="{ name: 'ShoppingCart' }">Cart</v-btn>
+    <!-- <v-btn text :to="{ name: 'ShoppingCart' }">Cart</v-btn> -->
     <v-btn text :to="{ name: 'About' }">About</v-btn>
     <v-btn text :to="{ name: 'Contact' }">Contact</v-btn>
     <v-btn text :to="{ name: 'Warranty' }">Warranty</v-btn>

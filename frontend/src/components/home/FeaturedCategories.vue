@@ -12,7 +12,7 @@
           class="mx-auto"
           max-width="344"
           elevation="4"
-          @click="$router.push({ name: 'shop', query: { category: category.name } })"
+          @click="$router.push({ name: 'ProductGrid', query: { category: category.name } })"
         >
           <v-img :src="category.image" height="200px"></v-img>
           <v-card-title>{{ category.name }}</v-card-title>
@@ -36,10 +36,10 @@ export default {
           name: 'School Bags',
           image: require('@/assets/schoolbag.png'),
         },
-        // {
-        //   name: 'Luggage',
-        //   image: require('@/assets/luggage.jpg'),
-        // },
+        {
+          name: 'Luggage',
+          image: require('@/assets/luggage.png'),
+        },
       ],
     }
   },
