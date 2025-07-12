@@ -56,13 +56,14 @@ export default {
     <v-card-subtitle>₹ {{ product.price }}</v-card-subtitle>
     <v-card-text>{{ product.description }}</v-card-text>
     <v-card-actions>
-      <v-btn color="primary" @click.stop="$emit('add-to-cart', product)">Add to Cart</v-btn>
+      <v-btn color="primary" @click.stop="addToCart">Add to Cart</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
 import { BACKEND_URL } from '@/utils/config'
+import api from '@/utils/api'
 
 export default {
   name: 'ProductCard',
@@ -70,6 +71,36 @@ export default {
   methods: {
     getImageUrl(imagePath) {
       return `${BACKEND_URL}${imagePath}`
+    },
+    addToCart() {
+      const user = JSON.parse(localStorage.getItem('user'))
+      if (user) {
+        // logged-in: add to server cart
+        api.post('/cart/add', {
+          user_id: user.id,
+          product_id: this.product.id,
+          quantity: 1
+        })
+        .then(() => {
+          this.$emit('cart-updated')
+          this.$toast.success('Added to cart!')
+        })
+        .catch(err => {
+          console.error(err)
+          this.$toast.error('Error adding to cart')
+        })
+      } else {
+        // guest: add to localStorage cart
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+        const existing = cart.find(c => c.product.id === this.product.id)
+        if (existing) {
+          existing.quantity += 1
+        } else {
+          cart.push({ product: this.product, quantity: 1 })
+        }
+        localStorage.setItem('cart', JSON.stringify(cart))
+        this.$toast.success('Added to cart!')
+      }
     }
   }
 }

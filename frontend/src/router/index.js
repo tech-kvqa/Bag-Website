@@ -12,6 +12,7 @@ import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
 import Warranty from '../views/Warranty.vue';
 import FAQs from '../views/FAQs.vue';
+import Myorders from '../components/Orders/Myorders.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -27,6 +28,13 @@ const routes = [
   { path: '/contact', name: 'Contact', component: Contact },
   { path: '/warranty', name: 'Warranty', component: Warranty },
   { path: '/faqs', name: 'FAQs', component: FAQs },
+  { path: '/my-orders', name: 'Myorders', component: Myorders },
+  {
+    path: '/order-success/:orderId',
+    name: 'OrderSuccess',
+    component: () => import('@/views/OrderSuccess.vue')
+  }
+
 ]
 
 const router = createRouter({

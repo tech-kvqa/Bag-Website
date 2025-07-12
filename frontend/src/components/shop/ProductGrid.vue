@@ -61,6 +61,7 @@ export default {
 <script>
 import axios from 'axios'
 import ProductCard from '@/components/shop/ProductCard.vue'
+import api from '@/utils/api'
 
 export default {
   name: 'ProductGrid',
@@ -72,8 +73,8 @@ export default {
     }
   },
   mounted() {
-    // axios.get("http://127.0.0.1:5000/products")
-    axios.get("https://bag-website.onrender.com/products")
+    api.get("/products")
+    // axios.get("https://bag-website.onrender.com/products")
       .then(res => {
         this.allProducts = res.data
         this.filterProducts()

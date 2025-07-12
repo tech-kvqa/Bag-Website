@@ -12,6 +12,7 @@
 <script>
 import axios from 'axios'
 import ProductCard from '@/components/shop/ProductCard.vue'
+import api from '@/utils/api'
 
 export default {
   name: 'Wishlist',
@@ -30,7 +31,7 @@ export default {
       if (user) {
         const userId = JSON.parse(user).id
         // axios.get(`http://127.0.0.1:5000/wishlist?user_id=${userId}`)
-        axios.get(`https://bag-website.onrender.com/wishlist?user_id=${userId}`)
+        api.get(`/wishlist?user_id=${userId}`)
           .then(res => {
             this.wishlist = res.data
           })

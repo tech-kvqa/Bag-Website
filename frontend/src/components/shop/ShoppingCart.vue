@@ -125,6 +125,7 @@ export default {
 
 <script>
 import axios from 'axios'
+import api from '@/utils/api'
 
 export default {
   name: 'ShoppingCart',
@@ -147,8 +148,7 @@ export default {
     loadCart() {
       if (this.user) {
         // Load cart from server
-        // axios.get(`http://127.0.0.1:5000/cart?user_id=${this.user.id}`)
-        axios.get(`https://bag-website.onrender.com/cart?user_id=${this.user.id}`)
+        api.get(`/cart?user_id=${this.user.id}`)
           .then(res => {
             this.cartItems = res.data
           })
@@ -156,7 +156,11 @@ export default {
       } else {
         // Load cart from localStorage
         const localCart = JSON.parse(localStorage.getItem('cart') || '[]')
-        this.cartItems = localCart
+        // Add backend URL to image paths for local items
+        this.cartItems = localCart.map(item => {
+          item.product.image_url = `${BACKEND_URL}${item.product.image_url}`
+          return item
+        })
       }
     },
     increaseQuantity(item) {
@@ -206,7 +210,7 @@ export default {
       }
     },
     checkout() {
-      alert("Proceeding to checkout functionality will be implemented in Phase 12")
+      this.$router.push({ name: 'Checkout' })
     }
   }
 }

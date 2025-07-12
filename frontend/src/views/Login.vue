@@ -9,6 +9,7 @@
 
 <script>
 import axios from 'axios'
+import api from '@/utils/api'
 
 export default {
   data() {
@@ -19,8 +20,8 @@ export default {
   },
   methods: {
     login() {
-      // axios.post("http://127.0.0.1:5000/login", {
-      axios.post("https://bag-website.onrender.com/login", {
+      api.post("/login", {
+      // axios.post("https://bag-website.onrender.com/login", {
         email: this.email,
         password: this.password
         })
