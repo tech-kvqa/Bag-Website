@@ -176,8 +176,7 @@ export default {
     updateCart(item) {
       if (this.user) {
         // Update server-side cart
-        // axios.post('http://127.0.0.1:5000/cart', {
-        axios.post('https://bag-website.onrender.com/cart', {
+        api.post('/cart', {
           user_id: this.user.id,
           product_id: item.product.id,
           quantity: 1
@@ -196,9 +195,8 @@ export default {
     },
     removeItem(item) {
       if (this.user) {
-        // Remove from server cart
-        // axios.delete(`http://127.0.0.1:5000/cart/clear?user_id=${this.user.id}`)
-        axios.delete(`https://bag-website.onrender.com/cart/clear?user_id=${this.user.id}`)
+        // Remove just the selected item from server cart
+        api.delete(`/cart/${item.id}`)
           .then(() => this.loadCart())
           .catch(err => console.error(err))
       } else {

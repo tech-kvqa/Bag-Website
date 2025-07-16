@@ -32,6 +32,10 @@ class Order(db.Model):
     total_amount = db.Column(db.Float)
     status = db.Column(db.String(50), default='Pending')
     user_id = db.Column(db.Integer, nullable=True)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    tracking_status = db.Column(db.String(50), default='Processed')  # or 'Out for Delivery'
+    tracking_id = db.Column(db.String(100), nullable=True)
+
 
 
 class OrderItem(db.Model):
@@ -49,6 +53,7 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
     phone = db.Column(db.String(20))
     address = db.Column(db.String(300))
+    is_admin = db.Column(db.Boolean, default=False)
 
 class Wishlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -62,3 +67,9 @@ class CartItem(db.Model):
     quantity = db.Column(db.Integer, nullable=False, default=1)
 
     product = db.relationship('Product')
+
+class Notification(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    message = db.Column(db.String(300), nullable=False)
+    is_read = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())

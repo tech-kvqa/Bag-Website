@@ -57,6 +57,9 @@ export default {
     <v-card-text>{{ product.description }}</v-card-text>
     <v-card-actions>
       <v-btn color="primary" @click.stop="addToCart">Add to Cart</v-btn>
+      <v-btn icon color="pink" @click="addToWishlist">
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -100,6 +103,24 @@ export default {
         }
         localStorage.setItem('cart', JSON.stringify(cart))
         this.$toast.success('Added to cart!')
+      }
+    },
+    addToWishlist() {
+      const user = JSON.parse(localStorage.getItem('user'))
+      if (user) {
+        api.post('/wishlist', {
+          user_id: user.id,
+          product_id: this.product.id
+        })
+        .then(() => {
+          alert(`${this.product.name} added to wishlist!`)
+        })
+        .catch(err => {
+          console.error(err)
+          alert('Failed to add to wishlist')
+        })
+      } else {
+        this.$router.push('/login')
       }
     }
   }

@@ -1,7 +1,9 @@
 from app import app, db
-from models import Product
+from models import Product, User
+from werkzeug.security import generate_password_hash
 
 with app.app_context():
+    db.create_all()
     # Clear existing products (if needed)
     Product.query.delete()
 
@@ -87,6 +89,24 @@ with app.app_context():
     ]
 
     db.session.bulk_save_objects(products)
+
+    existing_admin = User.query.filter_by(email='admin@shop.com').first()
+    if not existing_admin:
+        admin_user = User(
+            name='Admin',
+            email='akanuragkumar4@gmail.com',
+            password=generate_password_hash('qwerty'),
+            phone='9999999999',
+            address='Admin HQ',
+            is_admin=True
+        )
+        db.session.add(admin_user)
+        print("✅ Admin user created successfully.")
+    else:
+        print("ℹ️ Admin user already exists.")
+
     db.session.commit()
 
     print("✅ Product table seeded with demo data.")
+
+

@@ -104,6 +104,9 @@ export default {
         <h3>₹ {{ product.price }}</h3>
         <p>{{ product.description }}</p>
         <v-text-field v-model="quantity" type="number" label="Quantity" min="1" class="mt-4"></v-text-field>
+        <v-btn icon color="pink" class="mt-2 ml-2" @click="addToWishlist">
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
         <v-btn color="primary" class="mt-2" @click="addToCart">Add to Cart</v-btn>
       </v-col>
     </v-row>
@@ -135,6 +138,36 @@ export default {
     getImageUrl(imagePath) {
       return `${BACKEND_URL}${imagePath}`
     },
+    // addToCart() {
+    //   const user = JSON.parse(localStorage.getItem('user'))
+    //   if (user) {
+    //     // Logged in — Add to server cart
+    //     api.post(`/cart/add`, {
+    //       user_id: user.id,
+    //       product_id: this.product.id,
+    //       quantity: this.quantity
+    //     })
+    //     .then(() => {
+    //       alert(`${this.quantity} ${this.product.name}(s) added to your cart!`)
+    //     })
+    //     .catch(err => {
+    //       console.error(err)
+    //       alert('Failed to add to cart')
+    //     })
+    //   } else {
+    //     // Guest — Add to localStorage cart
+    //     let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    //     const existing = cart.find(c => c.product.id === this.product.id)
+    //     if (existing) {
+    //       existing.quantity += parseInt(this.quantity)
+    //     } else {
+    //       cart.push({ product: this.product, quantity: parseInt(this.quantity) })
+    //     }
+    //     localStorage.setItem('cart', JSON.stringify(cart))
+    //     alert(`${this.quantity} ${this.product.name}(s) added to your cart!`)
+    //   }
+    // }
+
     addToCart() {
       const user = JSON.parse(localStorage.getItem('user'))
       if (user) {
@@ -152,16 +185,27 @@ export default {
           alert('Failed to add to cart')
         })
       } else {
-        // Guest — Add to localStorage cart
-        let cart = JSON.parse(localStorage.getItem('cart') || '[]')
-        const existing = cart.find(c => c.product.id === this.product.id)
-        if (existing) {
-          existing.quantity += parseInt(this.quantity)
-        } else {
-          cart.push({ product: this.product, quantity: parseInt(this.quantity) })
-        }
-        localStorage.setItem('cart', JSON.stringify(cart))
-        alert(`${this.quantity} ${this.product.name}(s) added to your cart!`)
+        // Not logged in — redirect to login
+        this.$router.push('/login')
+      }
+    },
+
+    addToWishlist() {
+      const user = JSON.parse(localStorage.getItem('user'))
+      if (user) {
+        api.post('/wishlist', {
+          user_id: user.id,
+          product_id: this.product.id
+        })
+        .then(() => {
+          alert(`${this.product.name} added to wishlist!`)
+        })
+        .catch(err => {
+          console.error(err)
+          alert('Failed to add to wishlist')
+        })
+      } else {
+        this.$router.push('/login')
       }
     }
   }
