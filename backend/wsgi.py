@@ -22,16 +22,22 @@
 
 
 # wsgi.py
-import eventlet
-eventlet.monkey_patch()
+# import eventlet
+# eventlet.monkey_patch()
 
-from app import app, socketio, db
-from flask_socketio import WSGIApp  # ✅ Add this import
+# from app import app, socketio, db
+# from flask_socketio import WSGIApp  # ✅ Add this import
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
-# ✅ This is the correct WSGI app for Flask-SocketIO 6+
-application = WSGIApp(socketio, app)
+# # ✅ This is the correct WSGI app for Flask-SocketIO 6+
+# application = WSGIApp(socketio, app)
+
+from app import app, socketio
+
+if __name__ == "__main__":
+    socketio.run(app)
+
 
 
