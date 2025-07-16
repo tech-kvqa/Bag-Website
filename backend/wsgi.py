@@ -1,8 +1,8 @@
 from app import app, socketio, db
 
-# Optional: Ensure database is initialized on deployment
 with app.app_context():
     db.create_all()
 
-# This is what Gunicorn will use
-socketio_app = socketio
+# This is the callable gunicorn needs
+def socketio_app(environ, start_response):
+    return socketio.wsgi_app(environ, start_response)
