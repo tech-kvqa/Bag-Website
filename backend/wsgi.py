@@ -34,6 +34,9 @@
 # # ✅ This is the correct WSGI app for Flask-SocketIO 6+
 # application = WSGIApp(socketio, app)
 
+import eventlet
+eventlet.monkey_patch()
+
 from app import app, socketio
 
 if __name__ == "__main__":
