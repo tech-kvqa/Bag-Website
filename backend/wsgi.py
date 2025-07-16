@@ -26,10 +26,12 @@ import eventlet
 eventlet.monkey_patch()
 
 from app import app, socketio, db
+from flask_socketio import WSGIApp  # ✅ Add this import
 
 with app.app_context():
     db.create_all()
 
-# Proper wrapping
-application = socketio.get_wsgi_app(app)
+# ✅ This is the correct WSGI app for Flask-SocketIO 6+
+application = WSGIApp(socketio, app)
+
 
